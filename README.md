@@ -50,6 +50,7 @@ foreach ($y in 2023, 2024, 2025) {
   New-Item -ItemType Directory -Force "data/raw/$y" | Out-Null
   foreach ($d in "75", "77", "78", "91", "92", "93", "94", "95") {
     Invoke-WebRequest "https://files.data.gouv.fr/geo-dvf/latest/csv/$y/departements/$d.csv.gz" -OutFile "data/raw/$y/$d.csv.gz"
+    Start-Sleep -Seconds 3
   }
 }
 ```
@@ -61,9 +62,16 @@ for y in 2023 2024 2025; do
   mkdir -p data/raw/$y
   for d in 75 77 78 91 92 93 94 95; do
     curl -sSL -o data/raw/$y/$d.csv.gz "https://files.data.gouv.fr/geo-dvf/latest/csv/$y/departements/$d.csv.gz"
+    sleep 3
   done
 done
+
+# Vérification : aucune ligne ne doit s'afficher (sinon, retélécharger le fichier indiqué)
+file data/raw/*/*.csv.gz | grep -v gzip
 ```
+
+La pause entre deux fichiers évite que le serveur limite les requêtes : il renvoie alors une page
+HTML au lieu du fichier, ce que la commande de vérification permet de repérer.
 
 ### Régénérer le fichier nettoyé
 
@@ -82,7 +90,8 @@ donner des chiffres légèrement différents de ceux de ce rendu.
 
 ## Installation et lancement
 
-Python 3.11 ou plus récent (développé sous Python 3.13).
+Python 3.11 à 3.13 (développé et testé sous Python 3.13). Les versions plus récentes de Python
+ne disposent pas encore de toutes les dépendances précompilées (pyarrow notamment).
 
 ```bash
 python -m venv .venv
@@ -100,6 +109,7 @@ app.py                      Point d'entrée : configuration, navigation, filtres
 requirements.txt            Dépendances aux versions figées
 README.md
 .streamlit/config.toml      Thème de l'application
+assets/logo_efrei.png       Logo affiché dans le menu latéral
 data/
   dvf_idf_clean.parquet     Données nettoyées (lues par l'application)
   dvf_idf_clean.csv         Données nettoyées (export lisible)
@@ -129,7 +139,7 @@ surface habitable.
 | **Territoires** | Carte des communes (taille = ventes, couleur = prix ou évolution). Classement des départements, benchmark Valeur / Médiane IDF / Écart / Évolution, top 10 et bottom 10 des communes. |
 | **Zoom commune** | Choix département puis commune. Commune comparée à son département et à l'Île-de-France, évolution trimestrielle, distribution des prix. Scorecard « territoires à surveiller » et test de robustesse du score. |
 | **Données** | Funnel du nettoyage, contrôles qualité (valeurs manquantes, bornes P1 / P99, coordonnées GPS), tableau interactif des ventes, téléchargement CSV des ventes filtrées et des agrégats par commune, hypothèses et limites. |
-| **Aide à la décision** | Trois constats, deux recommandations et une limite, chacun appuyé par des chiffres recalculés et un graphique ou des indicateurs de preuve. Le constat (mesuré) y est séparé de l'interprétation (hypothèse). |
+| **Decision Support / Recommendations** (aide à la décision) | Trois constats, deux recommandations et une limite, chacun appuyé par des chiffres recalculés et un graphique ou des indicateurs de preuve. Le constat (mesuré) y est séparé de l'interprétation (hypothèse). |
 
 Tous les chiffres affichés, y compris dans les titres et les textes, sont calculés à partir des
 données au moment de l'affichage.

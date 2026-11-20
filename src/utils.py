@@ -354,6 +354,11 @@ def sidebar_filters() -> Filters:
         "Source : DVF géolocalisées (DGFiP / Etalab), 2023–2025. "
         "Ventes d'un seul logement (appartement ou maison)."
     )
+    sb.markdown(
+        "**Clément Eugène**  \n"
+        "[LinkedIn](https://www.linkedin.com/in/cl%C3%A9ment-eug%C3%A8ne-820903340/) · "
+        "[GitHub](https://github.com/Clm180)"
+    )
 
     f = Filters(
         year=int(st.session_state["flt_year"]),
@@ -761,7 +766,7 @@ PAGES = [
      "Du département à la commune"),
     ("Décider", "pages/4_Donnees.py", "Données", ICONS["data"],
      "Qualité, tableau et export"),
-    ("Décider", "pages/5_Aide_decision.py", "Aide à la décision", ICONS["decision"],
+    ("Décider", "pages/5_Aide_decision.py", "Decision Support / Recommendations", ICONS["decision"],
      "Constats et recommandations"),
 ]
 

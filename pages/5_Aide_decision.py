@@ -17,7 +17,8 @@ years = u.available_years()
 Y0, YP, YL = years[0], years[-2], years[-1]
 SLATE, SLATE_LIGHT = u.SLATE, u.SLATE_LIGHT
 
-st.title("Aide à la décision / Recommandations")
+st.title("Decision Support / Recommendations")
+st.caption("Aide à la décision : constats, recommandations et limite, tous appuyés par les données du tableau de bord.")
 st.caption(
     f"Périmètre : toute l'Île-de-France, tous logements · comparaison {N} vs {N1} (année N du menu "
     "latéral) · les autres filtres sont volontairement ignorés pour que les conclusions ne dépendent "

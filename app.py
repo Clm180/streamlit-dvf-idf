@@ -6,6 +6,9 @@ from src import utils as u
 
 st.set_page_config(page_title="Observatoire du logement IDF", page_icon=u.ICONS["app"], layout="wide")
 
+st.logo(str(u.ROOT / "assets" / "logo_efrei.png"), size="large")
+st.html("<style>[data-testid='stSidebarHeader'] img, [data-testid='stLogo'] {height: 4.5rem !important; max-width: 100% !important;}</style>")
+
 sections: dict[str, list] = {}
 for i, (section, path, title, icon, _) in enumerate(u.existing_pages()):
     sections.setdefault(section, []).append(
