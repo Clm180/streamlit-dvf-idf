@@ -1,0 +1,14 @@
+# Environnement Python
+.venv/
+venv/
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# Données brutes et export CSV volumineux (régénérables : voir README)
+data/raw/
+data/dvf_idf_clean.csv
+
+# Fichiers locaux
+.DS_Store
+docs/

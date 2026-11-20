@@ -1,0 +1,8 @@
+etape,nb,unite
+1. Lignes brutes chargées,1325104,lignes
+2. Après suppression des doublons exacts,1178512,lignes
+3. Ventes classiques + VEFA,1164871,lignes
+4. Mutations avec exactement 1 logement,364744,ventes
+5. Prix et surface renseignés,364592,ventes
+6. Surface >= 9 m² et prix >= 15 000 €,361314,ventes
+"7. Prix/m² dans [P1 ; P99] par année, département et type",354051,ventes
