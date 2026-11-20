@@ -310,8 +310,10 @@ def sidebar_filters() -> Filters:
     sb.header("Filtres")
     sb.selectbox(
         "Année de référence (N)", year_options, key="_w_year",
+        format_func=lambda y: f"{y} vs {y - 1}",
         on_change=_sync, args=("year",),
-        help="Les indicateurs portent sur l'année N et sont comparés à l'année N-1.",
+        help="2023 sert d'année de comparaison pour 2024 et apparaît dans "
+             "les séries de la page Évolution (2023-2025)",
     )
     sb.selectbox(
         "Zone", ZONE_OPTIONS, key="_w_zone", on_change=_on_zone,
